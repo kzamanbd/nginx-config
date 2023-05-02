@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+    nginx-app:
+        build: .
+        networks:
+            - nginx-network
+        volumes:
+            - ./:/app:ro # ro:Read only
+            - /app/node_modules # node_modules will be created in the container
+
+    test-server:
+        image: nginx:alpine
+        container_name: nginx-server
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - nginx-app
+        networks:
+            - nginx-network
+
+# Network
+networks:
+    nginx-network:
+        driver: bridge
