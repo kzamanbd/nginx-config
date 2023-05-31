@@ -3,7 +3,7 @@
 const express = require('express');
 
 // Constants
-const PORT = 8000;
+const PORT = 8085;
 const HOST = 'localhost';
 
 // App
@@ -17,6 +17,6 @@ app.get('/', (req, res) => {
 	res.send(`Hello World from docker ${ip}`);
 });
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
 	console.log(`Running on http://${HOST}:${PORT}`);
 });
